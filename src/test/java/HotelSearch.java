@@ -2,8 +2,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -22,5 +24,15 @@ public class HotelSearch {
         driver.findElement(By.xpath("//input[@id='travellersInput']")).click();
         driver.findElement(By.xpath("//button[@id='adultPlusBtn']")).click();
         driver.findElement(By.xpath("//button[@id='childPlusBtn']")).click();
+        driver.findElement(By.xpath("//div[@id='hotels']//button[@type='submit']")).click();
+        List<WebElement> hotelNames = driver.findElements(By.xpath("//h4/a/b"));
+        for(WebElement name: hotelNames){
+            System.out.println(name.getText());
+        }
+        Assert.assertEquals(hotelNames.get(0).getText(),"Jumeirah Beach Hotel");
+        Assert.assertEquals(hotelNames.get(1).getText(),"Oasis Beach Tower");
+        Assert.assertEquals(hotelNames.get(2).getText(),"Rose Rayhaan Rotana");
+        Assert.assertEquals(hotelNames.get(3).getText(),"Hyatt Regency Perth");
+
     }
 }
