@@ -19,6 +19,8 @@ public class HotelSearch {
         driver.findElement(By.xpath("//div[@id='select2-drop']//span[text()='Dubai']")).click();
         driver.findElement(By.xpath("//div[@id='dpd1']/div/input")).sendKeys("01/02/2024");
         driver.findElement(By.xpath("//div[@id='dpd2']/div/input")).sendKeys("14/02/2024");
-
+        driver.findElement(By.xpath("//input[@id='travellersInput']")).click();
+        driver.findElement(By.xpath("//button[@id='adultPlusBtn']")).click();
+        driver.findElement(By.xpath("//button[@id='childPlusBtn']")).click();
     }
 }
