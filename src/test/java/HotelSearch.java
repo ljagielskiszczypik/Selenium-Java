@@ -35,4 +35,22 @@ public class HotelSearch {
         Assert.assertEquals(hotelNames.get(3).getText(),"Hyatt Regency Perth");
 
     }
+
+    @Test
+    public void searchHotelNotFound(){
+        WebDriver driver = new ChromeDriver();
+        driver.get("http://www.kurs-selenium.pl/demo/");
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+        driver.findElement(By.xpath("//div[@id='dpd1']/div/input")).sendKeys("01/02/2024");
+        driver.findElement(By.xpath("//div[@id='dpd2']/div/input")).sendKeys("14/02/2024");
+        driver.findElement(By.xpath("//input[@id='travellersInput']")).click();
+        driver.findElement(By.xpath("//button[@id='adultPlusBtn']")).click();
+        driver.findElement(By.xpath("//button[@id='childPlusBtn']")).click();
+        driver.findElement(By.xpath("//div[@id='hotels']//button[@type='submit']")).click();
+        WebElement notFoundText = driver.findElement(By.xpath("//h2"));
+        Assert.assertEquals(notFoundText.getText(),"No Results Found");
+        driver.quit();
+
+    }
 }
