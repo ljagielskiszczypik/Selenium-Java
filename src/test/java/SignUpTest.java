@@ -35,6 +35,7 @@ public class SignUpTest {
         wait.until(ExpectedConditions.visibilityOfElementLocated(headingLocator));
         WebElement heading = driver.findElement(headingLocator);
         Assert.assertEquals(heading.getText(),"Hi, Łukasz Jagielski-Szczypik");
+        driver.quit();
     }
     @Test
     public void signUpWithoutCredentials(){
@@ -55,6 +56,31 @@ public class SignUpTest {
         Assert.assertEquals(alerts.get(2).getText(),"The Password field is required.");
         Assert.assertEquals(alerts.get(3).getText(),"The First name field is required.");
         Assert.assertEquals(alerts.get(4).getText(),"The Last Name field is required.");
+        driver.quit();
+    }
+
+    @Test
+    public void signUpWithIncorrectEmail(){
+        WebDriver driver = new ChromeDriver();
+        driver.get("http://www.kurs-selenium.pl/demo/");
+        driver.manage().window().maximize();
+        driver.findElement(By.xpath("//nav//ul/li[@id='li_myaccount']")).click();
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(8));
+        By signUp = By.xpath("/html/body/nav/div/div[2]/ul[2]/ul/li[1]/ul/li[2]/a");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(signUp));
+        driver.findElement(signUp).click();
+        driver.findElement(By.xpath("//input[@name='firstname']")).sendKeys("Łukasz");
+        driver.findElement(By.xpath("//input[@name='lastname']")).sendKeys("Jagielski-Szczypik");
+        driver.findElement(By.xpath("//input[@name='phone']")).sendKeys("123456789");
+        int randNumb =(int)(Math.random()* 1000);
+        driver.findElement(By.xpath("//input[@name='email']")).sendKeys("lukas"+randNumb+".pl");
+        driver.findElement(By.xpath("//input[@name='password']")).sendKeys("haslo123");
+        driver.findElement(By.xpath("//input[@name='confirmpassword']")).sendKeys("haslo123");
+        driver.findElement(By.xpath("//form[@id='headersignupform']/div[@class='form-group']/button")).click();
+        By alertLocator = By.xpath("//div[@id='login']//p");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(alertLocator));
+        WebElement alert = driver.findElement(alertLocator);
+        Assert.assertEquals(alert.getText(),"The Email field must contain a valid email address.");
         driver.quit();
     }
 }
