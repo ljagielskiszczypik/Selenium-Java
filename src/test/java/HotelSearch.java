@@ -33,7 +33,7 @@ public class HotelSearch {
         Assert.assertEquals(hotelNames.get(1).getText(),"Oasis Beach Tower");
         Assert.assertEquals(hotelNames.get(2).getText(),"Rose Rayhaan Rotana");
         Assert.assertEquals(hotelNames.get(3).getText(),"Hyatt Regency Perth");
-
+        driver.quit();
     }
 
     @Test
@@ -51,6 +51,5 @@ public class HotelSearch {
         WebElement notFoundText = driver.findElement(By.xpath("//h2"));
         Assert.assertEquals(notFoundText.getText(),"No Results Found");
         driver.quit();
-
     }
 }
