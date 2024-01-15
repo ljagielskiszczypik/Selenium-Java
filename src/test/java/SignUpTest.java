@@ -5,19 +5,19 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
-public class SignUpTest {
+
+public class SignUpTest extends BaseTest{
+
     @Test
-    public void signUp(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("http://www.kurs-selenium.pl/demo/");
-        driver.manage().window().maximize();
+    public void signUpTest(){
         driver.findElement(By.xpath("//nav//ul/li[@id='li_myaccount']")).click();
         WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(8));
         By signUp = By.xpath("/html/body/nav/div/div[2]/ul[2]/ul/li[1]/ul/li[2]/a");
@@ -35,13 +35,9 @@ public class SignUpTest {
         wait.until(ExpectedConditions.visibilityOfElementLocated(headingLocator));
         WebElement heading = driver.findElement(headingLocator);
         Assert.assertEquals(heading.getText(),"Hi, Łukasz Jagielski-Szczypik");
-        driver.quit();
     }
     @Test
-    public void signUpWithoutCredentials(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("http://www.kurs-selenium.pl/demo/");
-        driver.manage().window().maximize();
+    public void signUpWithoutCredentialsTest(){
         driver.findElement(By.xpath("//nav//ul/li[@id='li_myaccount']")).click();
         WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(8));
         By signUp = By.xpath("/html/body/nav/div/div[2]/ul[2]/ul/li[1]/ul/li[2]/a");
@@ -56,14 +52,10 @@ public class SignUpTest {
         Assert.assertEquals(alerts.get(2).getText(),"The Password field is required.");
         Assert.assertEquals(alerts.get(3).getText(),"The First name field is required.");
         Assert.assertEquals(alerts.get(4).getText(),"The Last Name field is required.");
-        driver.quit();
     }
 
     @Test
-    public void signUpWithIncorrectEmail(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("http://www.kurs-selenium.pl/demo/");
-        driver.manage().window().maximize();
+    public void signUpWithIncorrectEmailTest(){
         driver.findElement(By.xpath("//nav//ul/li[@id='li_myaccount']")).click();
         WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(8));
         By signUp = By.xpath("/html/body/nav/div/div[2]/ul[2]/ul/li[1]/ul/li[2]/a");
@@ -81,6 +73,5 @@ public class SignUpTest {
         wait.until(ExpectedConditions.visibilityOfElementLocated(alertLocator));
         WebElement alert = driver.findElement(alertLocator);
         Assert.assertEquals(alert.getText(),"The Email field must contain a valid email address.");
-        driver.quit();
     }
 }
