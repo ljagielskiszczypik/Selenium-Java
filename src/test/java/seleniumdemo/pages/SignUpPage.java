@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+
+import java.util.List;
 
 public class SignUpPage {
     public SignUpPage(WebDriver driver){
@@ -23,6 +26,8 @@ public class SignUpPage {
     private WebElement signUpInputConfirmPasword;
     @FindBy(xpath = "//form[@id='headersignupform']/div[@class='form-group']/button")
     private WebElement signUpButton;
+    @FindBy(xpath = "//div[@id='login']//p")
+    List<WebElement> alerts;
 
     public void setFirstName(String name){
         signUpInputFirstName.sendKeys(name);
@@ -37,26 +42,29 @@ public class SignUpPage {
         int randNumb =(int)(Math.random()* 1000);
         String email = emailname + randNumb + "@gmail.com";
         signUpInputEmail.sendKeys(email);
-    }public void setPasword(String password){
+    }
+    public void setPasword(String password){
         signUpInputPasword.sendKeys(password);
-    }public void setConfirmPassword(String passwordConfirm){
+    }
+    public void setConfirmPassword(String passwordConfirm){
         signUpInputConfirmPasword.sendKeys(passwordConfirm);
     }
     public void clickSubmit(){
         signUpButton.click();
     }
-
-
-    //        driver.findElement(By.xpath("//input[@name='firstname']")).sendKeys("Łukasz");
-//        driver.findElement(By.xpath("//input[@name='lastname']")).sendKeys("Jagielski-Szczypik");
-//        driver.findElement(By.xpath("//input[@name='phone']")).sendKeys("123456789");
-//        int randNumb =(int)(Math.random()* 1000);
-//        driver.findElement(By.xpath("//input[@name='email']")).sendKeys("lukas"+randNumb+"@gmail.com");
-//        driver.findElement(By.xpath("//input[@name='password']")).sendKeys("haslo123");
-//        driver.findElement(By.xpath("//input[@name='confirmpassword']")).sendKeys("haslo123");
-//        driver.findElement(By.xpath("//form[@id='headersignupform']/div[@class='form-group']/button")).click();
-//        By headingLocator = By.xpath("//h3[@class='RTL']");
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(headingLocator));
-//        WebElement heading = driver.findElement(headingLocator);
-//        Assert.assertEquals(heading.getText(),"Hi, Łukasz Jagielski-Szczypik");
+    public void assertionOfAlerts(){
+        Assert.assertEquals(alerts.get(0).getText(),"The Email field is required.");
+        Assert.assertEquals(alerts.get(1).getText(),"The Password field is required.");
+        Assert.assertEquals(alerts.get(2).getText(),"The Password field is required.");
+        Assert.assertEquals(alerts.get(3).getText(),"The First name field is required.");
+        Assert.assertEquals(alerts.get(4).getText(),"The Last Name field is required.");
+    }
+    public void setIncorrectEmail(String emailname){
+        int randNumb =(int)(Math.random()* 1000);
+        String email = emailname + randNumb + ".pl";
+        signUpInputEmail.sendKeys(email);
+    }
+    public void assertionOfIncorrectEmailAlert(){
+        Assert.assertEquals(alerts.get(0).getText(),"The Email field must contain a valid email address.");
+    }
 }
