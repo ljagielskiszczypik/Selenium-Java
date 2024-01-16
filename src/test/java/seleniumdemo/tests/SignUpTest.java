@@ -1,6 +1,7 @@
 package seleniumdemo.tests;
 
 import org.testng.annotations.Test;
+import seleniumdemo.model.Model;
 import seleniumdemo.pages.HotelSearchPage;
 import seleniumdemo.pages.LoggedUserPage;
 import seleniumdemo.pages.SignUpPage;
@@ -11,12 +12,18 @@ public class SignUpTest extends BaseTest{
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         hotelSearchPage.clickSignUp(driver,Duration.ofSeconds(8));
         SignUpPage signUpPage = new SignUpPage(driver);
-        signUpPage.setFirstName("Łukasz");
-        signUpPage.setLastName("Jagielski-Szczypik");
-        signUpPage.setPhone("123456789");
-        signUpPage.setEmail("lukas");
-        signUpPage.setPasword("haslo123");
-        signUpPage.setConfirmPassword("haslo123");
+        Model user = new Model();
+        user.setFirstName("Łukasz");
+        user.setLastName("Jagielski-Szczypik");
+        user.setPhone("123456789");
+        user.setEmail("lukas");
+        user.setPassword("haslo123");
+        signUpPage.setFirstName(user);
+        signUpPage.setLastName(user);
+        signUpPage.setPhone(user);
+        signUpPage.setEmail(user);
+        signUpPage.setPasword(user);
+        signUpPage.setConfirmPassword(user);
         signUpPage.clickSubmit();
         LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
         loggedUserPage.headingAssertion(driver, Duration.ofSeconds(7));
@@ -34,12 +41,18 @@ public class SignUpTest extends BaseTest{
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         hotelSearchPage.clickSignUp(driver,Duration.ofSeconds(8));
         SignUpPage signUpPage = new SignUpPage(driver);
-        signUpPage.setFirstName("Łukasz");
-        signUpPage.setLastName("Jagielski-Szczypik");
-        signUpPage.setPhone("123456789");
-        signUpPage.setIncorrectEmail("lukas");
-        signUpPage.setPasword("haslo123");
-        signUpPage.setConfirmPassword("haslo123");
+        Model user = new Model();
+        user.setFirstName("Łukasz");
+        user.setLastName("Jagielski-Szczypik");
+        user.setPhone("123456789");
+        user.setEmail("lukas");
+        user.setPassword("haslo123");
+        signUpPage.setFirstName(user);
+        signUpPage.setLastName(user);
+        signUpPage.setPhone(user);
+        signUpPage.setIncorrectEmail(user);
+        signUpPage.setPasword(user);
+        signUpPage.setConfirmPassword(user);
         signUpPage.clickSubmit();
         signUpPage.assertionOfIncorrectEmailAlert();
     }

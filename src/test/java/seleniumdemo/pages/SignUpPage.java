@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import seleniumdemo.model.Model;
 
 import java.util.List;
 
@@ -29,25 +30,25 @@ public class SignUpPage {
     @FindBy(xpath = "//div[@id='login']//p")
     List<WebElement> alerts;
 
-    public void setFirstName(String name){
-        signUpInputFirstName.sendKeys(name);
+    public void setFirstName(Model user){
+        signUpInputFirstName.sendKeys(user.getFirstName());
     }
-    public void setLastName(String lastName){
-        signUpInputLastName.sendKeys(lastName);
+    public void setLastName(Model user){
+        signUpInputLastName.sendKeys(user.getLastName());
     }
-    public void setPhone(String phone){
-        signUpInputPhone.sendKeys(phone);
+    public void setPhone(Model user){
+        signUpInputPhone.sendKeys(user.getPhone());
     }
-    public void setEmail(String emailname){
+    public void setEmail(Model user){
         int randNumb =(int)(Math.random()* 1000);
-        String email = emailname + randNumb + "@gmail.com";
+        String email = user.getEmail() + randNumb + "@gmail.com";
         signUpInputEmail.sendKeys(email);
     }
-    public void setPasword(String password){
-        signUpInputPasword.sendKeys(password);
+    public void setPasword(Model user){
+        signUpInputPasword.sendKeys(user.getPassword());
     }
-    public void setConfirmPassword(String passwordConfirm){
-        signUpInputConfirmPasword.sendKeys(passwordConfirm);
+    public void setConfirmPassword(Model user){
+        signUpInputConfirmPasword.sendKeys(user.getPassword());
     }
     public void clickSubmit(){
         signUpButton.click();
@@ -59,12 +60,13 @@ public class SignUpPage {
         Assert.assertEquals(alerts.get(3).getText(),"The First name field is required.");
         Assert.assertEquals(alerts.get(4).getText(),"The Last Name field is required.");
     }
-    public void setIncorrectEmail(String emailname){
+    public void setIncorrectEmail(Model user){
         int randNumb =(int)(Math.random()* 1000);
-        String email = emailname + randNumb + ".pl";
+        String email = user.getEmail() + randNumb + ".pl";
         signUpInputEmail.sendKeys(email);
     }
     public void assertionOfIncorrectEmailAlert(){
         Assert.assertEquals(alerts.get(0).getText(),"The Email field must contain a valid email address.");
     }
+
 }
