@@ -1,16 +1,11 @@
 package seleniumdemo.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.time.Duration;
-import java.util.List;
 
 public class HotelSearchPage {
     @FindBy(xpath = "//span[text()='Search by Hotel or City Name']")
@@ -31,6 +26,8 @@ public class HotelSearchPage {
     private WebElement searchHotelChildrenPlusButton;
     @FindBy(xpath = "//div[@id='hotels']//button[@type='submit']")
     private WebElement searchHotelButtonSubmit;
+    @FindBy(xpath = "//h2")
+    private WebElement searchHotelNotFound;
 
     public HotelSearchPage(WebDriver driver){
         PageFactory.initElements(driver, this);
@@ -46,12 +43,20 @@ public class HotelSearchPage {
         searchHotelInputDpd1.sendKeys(checkIn);
         searchHotelInputDpd2.sendKeys(checkOut);
     }
-    public void setTravellers(){
+    public void setTravellers(int adultsToAdd, int childrenToAdd){
         searchHotelInputTravellers.click();
-        searchHotelAdultPlusButton.click();
-        searchHotelChildrenPlusButton.click();
+        for(int i =0; i<adultsToAdd;i++){
+            searchHotelAdultPlusButton.click();
+        }
+        for(int i =0; i<childrenToAdd;i++){
+            searchHotelChildrenPlusButton.click();
+        }
     }
     public void clickSubmit(){
         searchHotelButtonSubmit.click();
+    }
+
+    public void assertNotFoundText(){
+        Assert.assertEquals(searchHotelNotFound.getText(),"No Results Found");
     }
 }
