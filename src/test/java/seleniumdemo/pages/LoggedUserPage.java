@@ -16,8 +16,8 @@ public class LoggedUserPage {
     @FindBy(xpath = "//h3[@class='RTL']")
     private WebElement SignUpheading;
 
-    public void headingAssertion(WebDriver driver, Duration time){
-        WebDriverWait wait = new WebDriverWait(driver,time);
+    public void headingAssertion(WebDriver driver){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
         wait.until(ExpectedConditions.visibilityOf(SignUpheading));
         Assert.assertEquals(SignUpheading.getText(),"Hi, Łukasz Jagielski-Szczypik");
     }

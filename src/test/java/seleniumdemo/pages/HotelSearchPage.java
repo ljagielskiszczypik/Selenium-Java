@@ -44,11 +44,13 @@ public class HotelSearchPage {
 
     private static final Logger logger = LogManager.getLogger();
 
-    public void setCity(String city){
+    public void setCity(String city, WebDriver driver){
         logger.info("setting city: " + city);
         searchHotelSpan.click();
         searchHotelInput.sendKeys(city);
         logger.info("setting city done");
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(3));
+        wait.until(ExpectedConditions.visibilityOf(searchHotelSpanDubai));
         searchHotelSpanDubai.click();
     }
     public void setDate(String checkIn, String checkOut){
@@ -71,9 +73,9 @@ public class HotelSearchPage {
         Assert.assertEquals(searchHotelNotFound.getText(),"No Results Found");
     }
 
-    public void clickSignUp(WebDriver driver, Duration time){
+    public void clickSignUp(WebDriver driver){
         searchHotelMyAccount.click();
-        WebDriverWait wait = new WebDriverWait(driver,time);
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(searchHotelSignUp));
         searchHotelSignUp.click();
     }

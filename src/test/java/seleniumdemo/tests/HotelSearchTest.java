@@ -10,14 +10,12 @@ public class HotelSearchTest extends BaseTest{
     @Test(priority = 0)
     public void searchHotelTest(){
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.setCity("Dubai");
+        hotelSearchPage.setCity("Dubai", driver);
         hotelSearchPage.setDate("01/02/2024","14/02/2024");
         hotelSearchPage.setTravellers(2,1);
         hotelSearchPage.clickSubmit();
         ResultsPage resultsPage = new ResultsPage(driver);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.visibilityOf(resultsPage.hotelListWebElement));
-        resultsPage.assertHotelNames();
+        resultsPage.assertHotelNames(driver);
     }
     @Test (priority = 1)
     public void searchHotelNotFoundTest(){

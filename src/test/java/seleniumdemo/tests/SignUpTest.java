@@ -10,7 +10,7 @@ public class SignUpTest extends BaseTest{
     @Test
     public void signUpTest(){
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.clickSignUp(driver,Duration.ofSeconds(8));
+        hotelSearchPage.clickSignUp(driver);
         SignUpPage signUpPage = new SignUpPage(driver);
         Model user = new Model();
         user.setFirstName("Łukasz");
@@ -26,12 +26,12 @@ public class SignUpTest extends BaseTest{
         signUpPage.setConfirmPassword(user);
         signUpPage.clickSubmit();
         LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
-        loggedUserPage.headingAssertion(driver, Duration.ofSeconds(7));
+        loggedUserPage.headingAssertion(driver);
     }
     @Test
     public void signUpWithoutCredentialsTest(){
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.clickSignUp(driver,Duration.ofSeconds(8));
+        hotelSearchPage.clickSignUp(driver);
         SignUpPage signUpPage = new SignUpPage(driver);
         signUpPage.clickSubmit();
         signUpPage.assertionOfAlerts();
@@ -39,7 +39,7 @@ public class SignUpTest extends BaseTest{
     @Test
     public void signUpWithIncorrectEmailTest(){
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.clickSignUp(driver,Duration.ofSeconds(8));
+        hotelSearchPage.clickSignUp(driver);
         SignUpPage signUpPage = new SignUpPage(driver);
         Model user = new Model();
         user.setFirstName("Łukasz");
