@@ -1,6 +1,6 @@
 # Selenium-Java
 👋 Hi,
-This is automation test written in Java with Selenium framework. I developed it as a part of Udemy course. What i have learned by doing this project 💻:
+This is automation tests written in Java with Selenium framework. I developed it as a part of Udemy course. What i have learned by doing this project 💻:
 - how to install all the necessary tools (Java, IDE, Selenium)
 - how to locate elements on the page and perform actions on them
 - how to check the state of the elements and verify if it is as expected
