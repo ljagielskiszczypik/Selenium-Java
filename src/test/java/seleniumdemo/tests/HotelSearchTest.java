@@ -1,14 +1,11 @@
 package seleniumdemo.tests;
 
-
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import org.testng.annotations.Test;
 import seleniumdemo.pages.HotelSearchPage;
 import seleniumdemo.pages.ResultsPage;
 import seleniumdemo.utils.SeleniumHelper;
-
 import java.io.IOException;
 
 public class HotelSearchTest extends BaseTest{

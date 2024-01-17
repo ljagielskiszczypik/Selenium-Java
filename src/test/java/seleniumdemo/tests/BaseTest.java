@@ -9,12 +9,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import seleniumdemo.utils.DriverFactory;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
 public class BaseTest {
     protected static ExtentHtmlReporter htmlReporter;
     protected static ExtentReports extentReports;
-
     public WebDriver driver;
     @BeforeSuite
     public void beforeSuite(){

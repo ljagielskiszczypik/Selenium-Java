@@ -8,9 +8,7 @@ import seleniumdemo.pages.HotelSearchPage;
 import seleniumdemo.pages.LoggedUserPage;
 import seleniumdemo.pages.SignUpPage;
 import seleniumdemo.utils.SeleniumHelper;
-
 import java.io.IOException;
-import java.time.Duration;
 public class SignUpTest extends BaseTest{
     @Test
     public void signUpTest() throws IOException {

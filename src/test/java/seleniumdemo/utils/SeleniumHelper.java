@@ -2,14 +2,12 @@ package seleniumdemo.utils;
 
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.MediaEntityModelProvider;
-import org.apache.logging.log4j.core.util.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.io.FileHandler;
 import java.io.File;
 import java.io.IOException;
-
 public class SeleniumHelper {
     public static MediaEntityModelProvider getScreenshot(WebDriver driver) throws IOException {
         String path = takeScreenshot(driver);
